@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Comparateur de Prix</title>
+		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+	</head>
+	<body>
+<!--http://etherpad.net/p/esiea-4a-web-->
+	<div id="Ordi-Array-Example">
+		<main>
+			<!--ZONE AFFICHAGE-->		
+			<!--RETOUR-->
+				<div id="retourarriere" v-if="retour === true">
+					<button type="image" v-on:click="retourArriere" id="boutonretour" alt="">
+					<img src="https://cdn.glitch.com/63469b82-8f6b-4b2f-96cf-5637008ce049%2Ffleche.jpg?1536222169220" alt="arriere" id="retour" />
+					</button>
+				</div>
+			<!--AUTHENTIFICATION-->
+				<section id="authzone" v-if="currentPage === 'authzone'">
+					<center>
+						<fieldset id="connexion">
+							<legend>Connexion</legend>
+							<center>
+									<br>
+									<label for="identifiant"> Identifiant : </label>
+									<input type="text" name="identifiant" id="id" v-model="identifiant"/>
+									<p id="admin">*Mode administrateur : Admin</p>
+									<br>
+									<label for="mdp"> Mot de passe : </label>
+									<input type="password" name="mdp" id="mdp" v-model="pwd"/>
+							</center>		
+							<br>
+							<button v-on:click="checkForm">Valider</button>
+							<button v-on:click="chargementMainPage()">Passer</button>
+						</fieldset>
+					</center>
+				</section>
+			<!--CHOIX D ACTIVITE-->	
+				<section id="activityzone" v-else-if="currentPage === 'activityzone'">
+					<center>
+						<fieldset id="activite">
+							<legend>Choix d'activité</legend>
+							<input type="radio" name="choix" id="gaming" value="gaming" v-model="picked"/>
+							<label for="gamer">Gaming</label>
+							<br>
+							<input type="radio" name="choix" id="bureau" value="bureau" v-model="picked"/>
+							<label for="bureau">Bureautique</label>
+							<br>
+							<input type="radio" name="choix" id="stock" value="stock" v-model="picked"/>
+							<label for="stock">Stockage</label>
+							<br>
+							<input type="radio" name="choix" id="prog" value="prog" v-model="picked"/>
+							<label for="prog">Programmation</label>
+							<br>
+							<button v-on:click="checkActivity" type="button">Valider</button>
+						</fieldset>
+					</center>
+				</section>
+			<!--CORPS-->
+			<section id="mainpage" v-else-if="currentPage ==='mainpage'">
+			<div id="corps">
+            <h1>Pro-Compare</h1>
+            <!--BARRE DE NAVIGATION -->
+            <center><div id="navigation">
+              <nav id="barrenav">
+                <ul>
+                  <li id="home" v-on:click="currentContent='standard'">Home</li>
+                  <li id="rapport" v-on:click="checkCo">Choix</li>
+                  <li id="icone">
+                    <i id="icon" class="fa" v-on:click="switchMenu">&#xf011;</i>
+                  </li>
+                </ul>
+                </nav>
+              <div id="codeco" v-if="comenu===true">
+                <center>
+                  <button v-if="connect === false" v-on:click="connexionCompte">Connexion</button>
+                  <button v-if="connect === true" v-on:click="deconnexionCompte">Deconnexion</button>
+                </center>
+              </div>
+          </div></center>
+
+         <h2>Résultat de votre Comparaison</h2>
+            <!-- FORM ADD ORDI -->
+          <form v-if="admin">
+            <label for="new-Ordi">Ajouter un Ordinateur</label>
+            <input
+              v-model="newImage"
+              id="new-Image"
+              placeholder="Image (lien local)"
+              required="required"
+            >
+            <input
+                v-model="newName"
+                id="new-Name"
+                placeholder="Nom de l'Ordinateur"
+                required="required"
+            >
+            <input
+              v-model="newType"
+              id="new-Type"
+              placeholder="Type de l'Ordinateur"
+              required="required"
+            >			
+            <input
+              v-model="newStockage"
+              id="new_Ordi"
+              placeholder="Stockage"
+              required="required"
+            >
+            <input
+              v-model="newRam"
+              id="new-Ram"
+              placeholder="RAM"
+              required="required"
+            >
+            <input
+              v-model="newCarte"
+              id="new-Carte"
+              placeholder="Carte Graphique"
+              required="required"
+            >
+            <input
+              v-model="newProcesseur"
+              id="new-Processeur"
+              placeholder="Processeur"
+              required="required"
+            >
+            <input
+              v-model="newPrix"
+              id="new-Prix"
+              placeholder="Prix"
+              required="required"
+            >
+            <button v-on:click.prevent="newOrdi()"> Add </button>
+          </form>
+          <br>                                                                        
+       <form v-if="admin">	
+            <p>Modifier un Ordinateur</p>
+            <input  v-model="celulle"
+              id = "Celulle"
+              placeholder = "Celulle à modifier"
+            >
+            <input  v-model="changement"
+              id = "Changement"
+              placeholder = "Nouvelle Valeur"
+            >
+          </form>	
+          <br>                                                                  
+          <!--AFFICHAGE DU TABLEAU-->
+        <div id="div">
+            <table v-if="currentContent!=='choix'">
+              <tr>
+                <th></th>
+                <td v-for="Ordi in Ordis">
+                <img v-bind:src= "Ordi.src" /></td>
+              </tr>
+              <tr v-for="key in Object.keys(Ordis[0])" v-if="key!=='src'">
+                <th>{{key}}</th>
+                <td v-for="Ordi in Ordis" v-bind:key="Ordi.id">{{Ordi[key]}}</td>
+              </tr>
+              <tr>
+                <th></th>
+                <th v-for="Ordi in Ordis">
+                <input type="button" value="Acheter"  @click="afficher()"/>
+                </th>
+              </tr>
+              <tr>
+                <th></th>
+                <th v-if="admin" v-for="(Ordi,index) in Ordis" >
+                <input type="button" value="Supprimer" @click="supprimerElem(index)"/>
+                </th>
+              </tr>
+              <tr>
+                <th></th>
+                <th v-if="admin" v-for="(Ordi, index) in Ordis">
+                <input type="button" value="Modifier" @click="modifierElem(Ordi, index)"/>
+                </th>
+              </tr>
+            </table>
+            <table v-if="currentContent==='choix'">
+              <tr>
+                <th></th>
+                <td v-for="Ordi in Filtrer()" >
+                <img v-bind:src= "Ordi.src"/></td>
+              </tr>
+              <tr v-for="key in Object.keys(Ordis[0])" v-if="key!=='src'">
+                <th>{{key}}</th>
+                <td v-for="Ordi in Filtrer()" v-bind:key="Ordi.id">{{Ordi[key]}}</td>
+              </tr>
+              <tr>
+                <th></th>
+                <th v-for="Ordi in Filtrer()">
+                <input type="button" value="Acheter"  @click="afficher()"/>
+                </th>
+              </tr>
+            </table>
+          </div>
+          <br>                                                                                          
+          <!--FORM ACHETER ORDI-->
+         <form v-if="seen" >
+              <p>Numéro de Carte :</p>
+              <input v-model="NuC" pattern="[0-9][0-9][0-9][0-9][ -][0-9][0-9][0-9][0-9][ -][0-9][0-9][0-9][0-9][ -][0-9][0-9][0-9][0-9]" required="required">
+              <p>Date d'expiration :</p>
+              <input v-model = "DaE" type="month" required="required">
+              <p>Cryptogramme :</p>
+              <input v-model = "Cr" pattern="[0-9][0-9][0-9]" required="required">
+              <input type="submit" @click="Verifie()">
+            </form>          
+			  </div>
+      </section>
+		</main>
+	</div>
+	<!--FOOTER-->
+	<footer>
+		<div>
+			<center>
+				<p id="footer">Réalisé par Antonin Kadi & Mélanie Piot - 4ASI1</p>
+      </center>
+    </div>
+	</footer>
+</body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="javascripts/script.js" type="text/javascript"></script>
+
+</html>

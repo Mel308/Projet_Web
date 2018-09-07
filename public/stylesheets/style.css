@@ -1,0 +1,224 @@
+html,body, main{
+	height:98%;
+	margin:0;
+	padding:0;
+}
+body{
+	position:relative;	
+	background: url('https://cdn.glitch.com/63469b82-8f6b-4b2f-96cf-5637008ce049%2Fbackground.jpg?1536222185130') no-repeat;
+	background-size: 170%;
+}
+
+h1 {
+	text-align: center;
+	font-size: 40px;
+	margin-right: 50px;
+	margin-left: 50px;	
+	background-color: #333;
+	color: white;
+	border-radius: 10px;
+}
+h2 {
+	color: #333;
+	margin-left: 50px;
+}
+img {
+	width: 200px;
+	height: 200px;
+}
+table, th, td {
+	border: 3px solid black;
+	border-collapse: collapse;
+	height: 30px;
+	text-align: center;
+}
+table {
+	margin-left: 10px;
+}
+tr{
+	border: 1px solid black;
+}
+span {
+	display: none;
+}
+div {
+	display: block;
+	overflow: auto;
+}
+
+fieldset{
+	width:300px;
+	margin-top:10px;
+	box-shadow: 0 0 10px #999;
+}
+fieldset legend, fieldset button {
+	background-color: #333;
+	color: #fff;
+	padding: 3px 6px;
+	border:none;
+
+}
+label, input {
+	display: inline;
+	/*margin:auto*/
+}
+p{
+	font-size:16px;
+}
+nav, footer{
+	background-color:#333;
+	width:450px;
+	margin:auto;
+	/*padding:auto;*/
+	border-radius:10px;
+}
+nav{
+	height:50px;
+}
+footer{
+	height:20px;
+	margin-top:-40px;
+	color:white;
+}
+#navigation{
+  width:550px;
+  height : 140px;
+}
+#footer {
+	margin-top:-1px;
+}
+#displayzone{
+	background-color:white;
+	margin-left:200px;
+	margin-right:200px;
+	box-shadow: 0 0 50px #000000;
+	height:100%;
+	border-radius:10px;
+	display:block;
+	padding-bottom:50px;
+	padding-top:5px;
+	padding-left:5px;
+	padding-right:5px;
+}
+#activityzone{
+	z-index:1;
+	text-align:left;
+}
+#retourarriere{
+	display:inline-block;
+}
+#retour{
+	width:70px;
+	height:70px;
+	float:left;
+	color: white;
+}
+#boutonretour{
+	background-color:#333;
+	padding:0 0;
+	color:#111;
+	border:none;
+	margin-top:5px;
+	margin-left:5px;
+}
+#home:hover, #rapport:hover, #icon:hover{
+	opacity:0.5
+}
+#barrenav{
+	display:block;
+}
+#icon{
+	color:white;
+	font-size:28px;
+	float:right;
+	padding-left:160px;
+}
+/*#icon{
+	color:white;
+	font-size:28px;
+	float:right;
+}*/
+#admin{
+	font-size:10px;
+	color:black;
+	text-align:left;
+	margin-left:30px;
+}
+#home, #rapport, #icone{
+	display:inline-block;
+	margin: auto;
+	/*padding: auto;*/
+	overflow: hidden;
+	font-size:24px;
+	color:white;
+}
+#icone{
+	float:right;	
+	margin-right:40px;
+	margin-top:10px;
+}
+#home, #rapport{
+	padding-right:20px;
+	padding-top:10px;
+}
+
+#Ordi-Array-Example{
+	background-color:white;
+	margin-left:150px;
+	margin-right:150px;
+	box-shadow: 0 0 50px #000000;
+	border-radius:10px;
+	display:block;
+	padding-bottom:50px;
+	padding-top:15px;
+}
+/*#corps p {
+	color:black;
+	text-align:center;
+}*/
+#codeco li{
+	color:black;
+	display:block;
+	font-size:20px;
+}
+#codeco{
+	float:right;
+	display:block;
+	padding:20px;
+	margin-right:40px;
+	padding-right:15px;
+	z-index:1;
+	box-shadow:5px 5px 10px rgba(0.5,0.5,0.5,0.2);
+}
+/*#codeco{
+	float:right;
+	display:block;
+	padding:20px;
+	margin-right:40px;
+	z-index:1;
+	box-shadow:5px 5px 10px rgba(0.5,0.5,0.5,0.2);
+}*/
+#codeco button{
+	color:black;
+	background-color:white;
+	display:block;
+	font-size:20px;
+	border:none;
+}
+#activite input, #activite label{
+	float:left;	
+}
+#activite input{
+	margin-top:5px;
+}
+#activite label{
+	margin-left:10px;
+}
+#retourarriere:hover, #home:hover, #rapport:hover, #icon:hover, #codeco button:hover {
+	opacity:0.5;
+}
+fieldset button:hover{
+	background-color:white;
+	color:#111;
+	border:1px solid;
+}
